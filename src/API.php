@@ -148,7 +148,7 @@ class API
         }, $lists);
 
         uasort($lists, function ($a, $b) {
-            return strcmp($a["name"], $b["name"]);
+            return strcmp($a->get_name(), $b->get_name());
         });
 
         return $lists;
