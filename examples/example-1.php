@@ -8,7 +8,7 @@
  */
 
 require_once(dirname(__FILE__) . "/../src/API.php");
-require_once(dirname(__FILE__) . "/../src/List.php");
+require_once(dirname(__FILE__) . "/../src/ReadingList.php");
 require_once(dirname(__FILE__) . "/../src/Parser.php");
 
 $api = new \ReadingLists\API();
