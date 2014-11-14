@@ -1,0 +1,25 @@
+{
+   "name": "unikent/readinglists-php",
+   "description": "Reading Lists API for PHP.",
+   "type": "library",
+   "keywords": [
+      "framework"
+   ],
+   "homepage": "https://github.com/unikent/readinglists-php",
+   "authors": [{
+      "name": "Skylar Tristan Kelty",
+      "email": "s.kelty@kent.ac.uk",
+      "role": "lead"
+   }],
+   "require": {
+      "php": ">=5.3"
+   },
+   "autoload": {
+      "psr-4": {
+         "ReadingLists\\": ["src/"]
+      }
+   },
+   "require-dev": {
+      "phpdocumentor/phpdocumentor": "2.7"
+   }
+}
