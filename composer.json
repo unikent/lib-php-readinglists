@@ -3,7 +3,7 @@
    "description": "Reading Lists API for PHP.",
    "type": "library",
    "keywords": [
-      "framework"
+      "library", "api", "talis aspire"
    ],
    "homepage": "https://github.com/unikent/readinglists-php",
    "authors": [{
