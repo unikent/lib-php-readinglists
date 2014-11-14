@@ -115,7 +115,7 @@ class Parser
     public function get_list($id) {
         $key = $this->baseurl . self::INDEX_LISTS . $id;
         if (isset($this->raw[$key])) {
-            return new reading_list($id, $this->raw[$key]);
+            return new ReadingList($id, $this->raw[$key]);
         }
 
         return null;

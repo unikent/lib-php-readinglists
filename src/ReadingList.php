@@ -12,7 +12,7 @@ namespace ReadingLists;
 /**
  * This class represents a reading list.
  */
-class reading_list {
+class ReadingList {
     /** Our Base URL */
     private $baseurl;
 
