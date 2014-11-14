@@ -13,6 +13,7 @@ namespace ReadingLists;
  * Reading Lists API.
  * 
  * @example ../examples/example-1.php How to grab a module's reading lists.
+ * @example ../examples/example-2.php How to grab a module's reading lists for a campus in a given year.
  */
 class API
 {
