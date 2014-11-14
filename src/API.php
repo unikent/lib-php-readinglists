@@ -28,6 +28,9 @@ class API
     /** Our Timeperiod. */
     private $_timeperiod;
 
+    /** A Cache Layer. */
+    private $_cache;
+
     /**
      * Constructor.
      */
@@ -76,6 +79,18 @@ class API
             $timeperiod = date("Y");
         }
         $this->_timeperiod = $timeperiod;
+    }
+
+    /**
+     * Set a cache object.
+     * This API expects it can call "set($key, $value)" and "get($key)" and wont try to do anything else.
+     */
+    public function set_cache_layer($cache) {
+        if (!method_exists($cache, 'set') || !method_exists($cache, 'get')) {
+            throw new \Exception("Invalid cache layer - must have set and get.");
+        }
+
+        $this->_cache = $cache;
     }
 
     /**
@@ -160,6 +175,13 @@ class API
      * CURL shorthand.
      */
     protected function curl($url) {
+        if ($this->_cache !== null) {
+            $v = $this->_cache->get($url);
+            if ($v) {
+                return $v;
+            }
+        }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,            $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -172,6 +194,12 @@ class API
             curl_setopt($ch, CURLOPT_TIMEOUT, $this->_timeout);
         }
 
-        return curl_exec($ch);
+        $result = curl_exec($ch);
+
+        if ($this->_cache !== null) {
+            $this->_cache->set($url, $result);
+        }
+
+        return $result;
     }
 }
