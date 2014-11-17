@@ -10,7 +10,7 @@ Add this to your composer require:
 
 Then get lists like so:
 ```
-$api = new \ReadingLists\API();
+$api = new \unikent\ReadingLists\API();
 
 $lists = $api->get_lists("EN902");
 

@@ -16,7 +16,7 @@
    },
    "autoload": {
       "psr-4": {
-         "ReadingLists\\": ["src/"]
+         "unikent\\ReadingLists\\": ["src/"]
       }
    },
    "require-dev": {
