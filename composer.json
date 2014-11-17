@@ -1,11 +1,11 @@
 {
-   "name": "unikent/readinglists-php",
+   "name": "unikent/lib-php-readinglists",
    "description": "Reading Lists API for PHP.",
    "type": "library",
    "keywords": [
       "library", "api", "talis aspire"
    ],
-   "homepage": "https://github.com/unikent/readinglists-php",
+   "homepage": "https://github.com/unikent/lib-php-readinglists",
    "authors": [{
       "name": "Skylar Tristan Kelty",
       "email": "s.kelty@kent.ac.uk",
