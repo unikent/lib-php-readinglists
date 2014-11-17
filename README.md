@@ -1,12 +1,12 @@
 readinglists-php
 ================
 
-[![Latest Stable Version](https://poser.pugx.org/unikent/readinglists-php/v/stable.png)](https://packagist.org/packages/unikent/readinglists-php)
+[![Latest Stable Version](https://poser.pugx.org/unikent/lib-php-readinglists/v/stable.png)](https://packagist.org/packages/unikent/lib-php-readinglists)
 
 PHP library for helping developers with reading lists integrations
 
 Add this to your composer require:
- * "unikent/readinglists-php": "dev-master"
+ * "unikent/lib-php-readinglists": "dev-master"
 
 Then get lists like so:
 ```
