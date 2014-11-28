@@ -2,7 +2,6 @@
 /**
  * Reading Lists API for is-dev applications.
  *
- * @package    ReadingLists
  * @copyright  2014 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -12,24 +11,51 @@ namespace unikent\ReadingLists;
 /**
  * Reading Lists API.
  * 
- * @example ../examples/example-1.php How to grab a module's reading lists.
- * @example ../examples/example-2.php How to grab a module's reading lists for a campus in a given year.
+ * @example ../examples/example-1/run.php How to grab a module's reading lists.
+ * @example ../examples/example-2/run.php How to grab a module's reading lists for a campus in a given year.
  */
 class API
 {
+    /**
+     * URL of the Canterbury Reading Lists system.
+     */
     const CANTERBURY_URL = 'http://resourcelists.kent.ac.uk';
+
+    /**
+     * URL of the Medway Reading Lists system.
+     */
     const MEDWAY_URL = 'http://medwaylists.kent.ac.uk';
 
-    /** CURL Timeout. */
+    /**
+     * CURL Timeout.
+     * 
+     * @internal
+     * @var int
+     */
     private $_timeout;
 
-    /** Our Campus. */
+    /**
+     * Our Campus.
+     * 
+     * @internal
+     * @var string
+     */
     private $_campus;
 
-    /** Our Timeperiod. */
+    /**
+     * Our Timeperiod.
+     * 
+     * @internal
+     * @var string
+     */
     private $_timeperiod;
 
-    /** A Cache Layer. */
+    /**
+     * A Cache Layer.
+     * 
+     * @internal
+     * @var mixed
+     */
     private $_cache;
 
     /**
@@ -85,6 +111,8 @@ class API
     /**
      * Set a cache object.
      * This API expects it can call "set($key, $value)" and "get($key)" and wont try to do anything else.
+     *
+     * @param object $cache An object with get and set methods.
      */
     public function set_cache_layer($cache) {
         if (!method_exists($cache, 'set') || !method_exists($cache, 'get')) {
@@ -96,6 +124,8 @@ class API
 
     /**
      * You need a time period map :)
+     * 
+     * @internal
      */
     private function get_time_period_map() {
         return array(
@@ -115,6 +145,7 @@ class API
     /**
      * Returns a list of reading lists for a given module code.
      *
+     * @internal
      * @param string $modulecode Module Code
      * @param string $campus Which campus do you want lists for? (canterbury, medway, both)
      * @return array An array of URLs to reading lists
@@ -174,6 +205,9 @@ class API
 
     /**
      * CURL shorthand.
+     *
+     * @internal
+     * @param string $url The URL to curl.
      */
     protected function curl($url) {
         if ($this->_cache !== null) {

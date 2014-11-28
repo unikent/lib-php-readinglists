@@ -2,7 +2,6 @@
 /**
  * Reading Lists API for is-dev applications.
  *
- * @package    ReadingLists
  * @copyright  2014 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -11,6 +10,8 @@ namespace unikent\ReadingLists;
 
 /**
  * Aspire Lists parser class.
+ * 
+ * @internal
  */
 class Parser
 {
@@ -22,19 +23,35 @@ class Parser
     const INDEX_NAME_SPEC = 'http://rdfs.org/sioc/spec/name';
     const INDEX_PARENT_SPEC = 'http://rdfs.org/sioc/spec/parent_of';
 
-    /** Our Base URL */
+    /**
+     * Our Base URL.
+     *
+     * @internal
+     * @var string
+     */
     private $baseurl;
 
-    /** The raw, decoded, JSON */
+    /**
+     * The raw, decoded, JSON.
+     *
+     * @internal
+     * @var array
+     */
     private $raw;
 
-    /** The parsed list */
+    /**
+     * The parsed list.
+     *
+     * @internal
+     * @var array
+     */
     private $data;
 
     /**
      * Constructor.
      *
-     * @param string $data The raw data from the CURL
+     * @param string $baseurl The base URL of the system.
+     * @param string $data The raw data from the CURL.
      */
     public function __construct($baseurl, $data) {
         $this->baseurl = $baseurl;
@@ -59,6 +76,9 @@ class Parser
 
     /**
      * Shorthand method.
+     *
+     * @param string $index The index to find.
+     * @param string $apiindex The index of the API.
      */
     private function get_dataset($index, $apiindex) {
         if (isset($this->data[$index])) {
@@ -96,6 +116,8 @@ class Parser
 
     /**
      * Grabs lists for a specific time period.
+     *
+     * @param string $timeperiod Get all lists within a timeperiod.
      */
     public function get_lists($timeperiod) {
         $lists = array();
@@ -111,6 +133,8 @@ class Parser
 
     /**
      * Returns a list object for a specific list.
+     *
+     * @param string $id Returns a list with a specified ID.
      */
     public function get_list($id) {
         $key = $this->baseurl . self::INDEX_LISTS . $id;
