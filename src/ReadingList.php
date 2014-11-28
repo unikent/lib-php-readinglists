@@ -2,7 +2,6 @@
 /**
  * Reading Lists API for is-dev applications.
  *
- * @package    ReadingLists
  * @copyright  2014 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -13,17 +12,36 @@ namespace unikent\ReadingLists;
  * This class represents a reading list.
  */
 class ReadingList {
-    /** Our Base URL */
+    /**
+     * Our Base URL.
+     *
+     * @internal
+     * @var string
+     */
     private $baseurl;
 
-    /** The list ID */
+    /**
+     * The list ID.
+     *
+     * @internal
+     * @var string
+     */
     private $id;
 
-    /** The parsed list */
+    /**
+     * The parsed list.
+     *
+     * @internal
+     * @var array
+     */
     private $data;
 
     /**
      * Constructor.
+     *
+     * @internal
+     * @param string $id The ID of the list
+     * @param array $data The JSON data (decoded).
      */
     public function __construct($id, $data) {
         $this->id = $id;
