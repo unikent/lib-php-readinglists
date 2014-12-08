@@ -11,7 +11,8 @@ namespace unikent\ReadingLists;
 /**
  * This class represents a reading list.
  */
-class ReadingList {
+class ReadingList
+{
     /**
      * Our API.
      *
@@ -127,7 +128,7 @@ class ReadingList {
         // Okay. We first grab all of our categories.
         $categories = array();
         foreach ($data[Parser::INDEX_PARENT_SPEC] as $category) {
-            $categories[] = $category['value'];
+            $categories[] = $this->api->get_category($category['value']);
         }
 
         return $categories;

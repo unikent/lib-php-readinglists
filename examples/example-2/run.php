@@ -11,12 +11,23 @@ require_once("vendor/autoload.php");
 
 $api = new \unikent\ReadingLists\API();
 $api->set_timeout(4000);
-$api->set_timeperiod("2013");
+$api->set_timeperiod("2014");
 $api->set_campus("canterbury");
 
-$lists = $api->get_lists("EN902");
+$lists = $api->get_lists("LW509");
+
+function print_cats($level, $category) {
+    echo str_repeat('-', $level) . " " . $category->get_name() . "\n";
+    foreach ($category->get_parents() as $cat) {
+        print_cats($level + 1, $cat);
+    }
+}
 
 foreach ($lists as $list) {
     echo "---------------------------------\n";
     echo $list;
+
+    foreach ($list->get_categories() as $category) {
+        print_cats(1, $category);
+    }
 }

@@ -186,6 +186,24 @@ class API
     }
 
     /**
+     * Returns a category, given an ID (which is a URL).
+     *
+     * @internal
+     * @param string $url The category URL.
+     */
+    public function get_category($url) {
+        // Curl the json for this category.
+        $raw = $this->curl("{$url}.json");
+
+        $parser = new Parser($this, $url, $raw);
+        if (!$parser->is_valid()) {
+            return array();
+        }
+
+        return $parser->get_category($url);
+    }
+
+    /**
      * Returns a list of reading lists for a given module code.
      *
      * @param string $modulecode Module Code

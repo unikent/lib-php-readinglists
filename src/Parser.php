@@ -22,6 +22,7 @@ class Parser
     const INDEX_LISTS_LIST_UPDATED = 'http://purl.org/vocab/resourcelist/schema#lastUpdated';
     const INDEX_NAME_SPEC = 'http://rdfs.org/sioc/spec/name';
     const INDEX_PARENT_SPEC = 'http://rdfs.org/sioc/spec/parent_of';
+    const INDEX_CHILD_SPEC = 'http://rdfs.org/sioc/spec/has_parent';
 
     /**
      * Our API.
@@ -151,6 +152,20 @@ class Parser
         $key = $this->baseurl . self::INDEX_LISTS . $id;
         if (isset($this->raw[$key])) {
             return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
+        }
+
+        return null;
+    }
+
+    /**
+     * So, this is a category.
+     * Return a sensible object.
+     * 
+     * @param string $url The category URL.
+     */
+    public function get_category($url) {print_r($this->raw);die;
+        if (isset($this->raw[$url])) {
+            return new Category($this->api, $this->baseurl, $url, $this->raw[$url]);
         }
 
         return null;
