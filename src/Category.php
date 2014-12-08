@@ -62,6 +62,13 @@ class Category
     }
 
     /**
+     * Grab list URL.
+     */
+    public function get_id() {
+        return substr($this->id, strrpos($this->id, '/') + 1);
+    }
+
+    /**
      * Returns the name of the category.
      */
     public function get_name() {
@@ -85,5 +92,26 @@ class Category
         }
 
         return $categories;
+    }
+
+    /**
+     * Grab list campus.
+     */
+    public function get_campus() {
+        return $this->baseurl == API::MEDWAY_URL ? 'Medway' : 'Canterbury';
+    }
+
+    /**
+     * Grab list base URL.
+     */
+    public function get_base_url() {
+        return $this->baseurl;
+    }
+
+    /**
+     * Grab list URL.
+     */
+    public function get_url() {
+        return $this->id;
     }
 }

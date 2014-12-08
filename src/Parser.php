@@ -163,7 +163,7 @@ class Parser
      * 
      * @param string $url The category URL.
      */
-    public function get_category($url) {print_r($this->raw);die;
+    public function get_category($url) {
         if (isset($this->raw[$url])) {
             return new Category($this->api, $this->baseurl, $url, $this->raw[$url]);
         }
