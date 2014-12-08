@@ -57,7 +57,14 @@ class ReadingList {
     }
 
     /**
-     * Grab list URL.
+     * Grab list campus.
+     */
+    public function get_campus() {
+        return $this->baseurl == API::MEDWAY_URL ? 'Medway' : 'Canterbury';
+    }
+
+    /**
+     * Grab list base URL.
      */
     public function get_base_url() {
         return $this->baseurl;
