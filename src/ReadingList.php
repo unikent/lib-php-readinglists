@@ -106,8 +106,10 @@ class ReadingList {
 
     /**
      * Get the time a list was last updated.
+     *
+     * @param bool $asstring Return the time as a contextual string?
      */
-    public function get_last_updated() {
+    public function get_last_updated($asstring = false) {
         $data = $this->data;
         $time = null;
 
@@ -116,7 +118,94 @@ class ReadingList {
             $time = strtotime($time);
         }
 
+        if ($asstring && $time) {
+            return $this->contextual_time($time);
+        }
+
         return $time;
+    }
+
+    /**
+     * Convert timestamp to contextual time
+     * 
+     * @author Pete Karl II (http://peterthelion.com/)
+     * @link http://snipt.net/pkarl/pkarlcom-contextualtime/
+     * @link http://pkarl.com/articles/contextual-user-friendly-time-and-dates-php/
+     * @link https://gist.github.com/hakre/2397187
+     * @param int $timestamp The timestamp to return
+     */
+    private static function contextual_time($timestamp) {
+        $largets = time();
+
+        $n = $largets - $smallts;
+        if ($n <= 1) {
+            return 'less than 1 second ago';
+        }
+
+        if ($n < (60)) {
+            return $n . ' seconds ago';
+        }
+
+        if ($n < (60 * 60)) {
+            $minutes = round($n / 60);
+            return 'about ' . $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
+        }
+
+        if ($n < (60 * 60 * 16)) {
+            $hours = round($n / (60 * 60));
+            return 'about ' . $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+        }
+
+        if ($n < (time() - strtotime('yesterday'))) {
+            return 'yesterday';
+        }
+
+        if ($n < (60 * 60 * 24)) {
+            $hours = round($n / (60 * 60));
+            return 'about ' . $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+        }
+
+        if ($n < (60 * 60 * 24 * 6.5)) {
+            return 'about ' . round($n / (60 * 60 * 24)) . ' days ago';
+        }
+
+        if ($n < (time() - strtotime('last week'))) {
+            return 'last week';
+        }
+
+        if (round($n / (60 * 60 * 24 * 7)) == 1) {
+            return 'about a week ago';
+        }
+
+        if ($n < (60 * 60 * 24 * 7 * 3.5)) {
+            return 'about ' . round($n / (60 * 60 * 24 * 7)) . ' weeks ago';
+        }
+
+        if ($n < (time() - strtotime('last month'))) {
+            return 'last month';
+        }
+
+        if (round($n / (60 * 60 * 24 * 7 * 4)) == 1) {
+            return 'about a month ago';
+        }
+
+        if ($n < (60 * 60 * 24 * 7 * 4 * 11.5)) {
+            return 'about ' . round($n / (60 * 60 * 24 * 7 * 4)) . ' months ago';
+        }
+
+        if ($n < (time() - strtotime('last year'))) {
+            return 'last year';
+        }
+
+        if (round($n / (60 * 60 * 24 * 7 * 52)) == 1) {
+            return 'about a year ago';
+        }
+
+        if ($n >= (60 * 60 * 24 * 7 * 4 * 12)) {
+            return 'about ' . round($n / (60 * 60 * 24 * 7 * 52)) . ' years ago';
+        }
+
+        return false;
     }
 
     /**
@@ -127,8 +216,8 @@ class ReadingList {
         $string .= " (" . $this->get_url() . ")";
         $string .= " with " . $this->get_item_count() . " items.";
 
-        $lm = $this->get_last_updated();
-        if ($lm !== null) {
+        $lm = $this->get_last_updated(true);
+        if (!empty($lm)) {
             $string .= " Last modified: " . $lm;
         }
 
