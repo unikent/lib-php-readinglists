@@ -105,6 +105,25 @@ class ReadingList {
     }
 
     /**
+     * Returns a list's categories.
+     */
+    public function get_categories() {
+        $data = $this->data;
+
+        if (empty($data[Parser::INDEX_PARENT_SPEC])) {
+            return array();
+        }
+
+        // Okay. We first grab all of our categories.
+        $categories = array();
+        foreach ($data[Parser::INDEX_PARENT_SPEC] as $category) {
+            $categories[] = $category['value'];
+        }
+
+        return $categories;
+    }
+
+    /**
      * Get the time a list was last updated.
      *
      * @param bool $asstring Return the time as a contextual string?
