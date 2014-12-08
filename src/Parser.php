@@ -65,11 +65,7 @@ class Parser
      */
     public function __construct($api, $baseurl, $data) {
         $this->api = $api;
-
         $this->baseurl = $baseurl;
-        if (strrpos($this->baseurl, '/') !== strlen($this->baseurl) - 1) {
-            $this->baseurl = $this->baseurl . '/';
-        }
 
         $this->raw = json_decode($data, true);
         if (!$this->raw) {
@@ -116,14 +112,14 @@ class Parser
      * Grab all known time periods.
      */
     public function get_timeperiods() {
-        return $this->get_dataset('timeperiods', $this->baseurl . self::INDEX_TIME_PERIOD);
+        return $this->get_dataset('timeperiods', $this->baseurl . '/' . self::INDEX_TIME_PERIOD);
     }
 
     /**
      * Grabs all known lists.
      */
     public function get_all_lists() {
-        return $this->get_dataset('lists', $this->baseurl . self::INDEX_LISTS);
+        return $this->get_dataset('lists', $this->baseurl . '/' . self::INDEX_LISTS);
     }
 
     /**
@@ -149,7 +145,7 @@ class Parser
      * @param string $id Returns a list with a specified ID.
      */
     public function get_list($id) {
-        $key = $this->baseurl . self::INDEX_LISTS . $id;
+        $key = $this->baseurl . '/' . self::INDEX_LISTS . $id;
         if (isset($this->raw[$key])) {
             return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
         }
