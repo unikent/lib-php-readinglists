@@ -24,6 +24,14 @@ class Parser
     const INDEX_PARENT_SPEC = 'http://rdfs.org/sioc/spec/parent_of';
 
     /**
+     * Our API.
+     *
+     * @internal
+     * @var API
+     */
+    private $api;
+
+    /**
      * Our Base URL.
      *
      * @internal
@@ -50,10 +58,13 @@ class Parser
     /**
      * Constructor.
      *
+     * @param API $api The API.
      * @param string $baseurl The base URL of the system.
      * @param string $data The raw data from the CURL.
      */
-    public function __construct($baseurl, $data) {
+    public function __construct($api, $baseurl, $data) {
+        $this->api = $api;
+
         $this->baseurl = $baseurl;
         if (strrpos($this->baseurl, '/') !== strlen($this->baseurl) - 1) {
             $this->baseurl = $this->baseurl . '/';
@@ -139,7 +150,7 @@ class Parser
     public function get_list($id) {
         $key = $this->baseurl . self::INDEX_LISTS . $id;
         if (isset($this->raw[$key])) {
-            return new ReadingList($this->baseurl, $id, $this->raw[$key]);
+            return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
         }
 
         return null;

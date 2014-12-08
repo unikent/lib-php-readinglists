@@ -13,6 +13,14 @@ namespace unikent\ReadingLists;
  */
 class ReadingList {
     /**
+     * Our API.
+     *
+     * @internal
+     * @var API
+     */
+    private $api;
+
+    /**
      * Our Base URL.
      *
      * @internal
@@ -40,12 +48,14 @@ class ReadingList {
      * Constructor.
      *
      * @internal
+     * @param API $api The API.
      * @param string $baseurl The base URL.
      * @param string $id The ID of the list
      * @param array $data The JSON data (decoded).
      */
-    public function __construct($baseurl, $id, $data) {
+    public function __construct($api, $baseurl, $id, $data) {
         $this->id = $id;
+        $this->api = $api;
         $this->data = $data;
         $this->baseurl = $baseurl;
     }

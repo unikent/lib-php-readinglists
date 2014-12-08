@@ -168,7 +168,7 @@ class API
         $raw = $this->curl("{$url}/modules/{$modulecode}/lists.json");
 
         // Parse the dodgy-looking result into List objects.
-        $parser = new Parser($url, $raw);
+        $parser = new Parser($this, $url, $raw);
         if (!$parser->is_valid()) {
             return array();
         }
