@@ -40,12 +40,14 @@ class ReadingList {
      * Constructor.
      *
      * @internal
+     * @param string $baseurl The base URL.
      * @param string $id The ID of the list
      * @param array $data The JSON data (decoded).
      */
-    public function __construct($id, $data) {
+    public function __construct($baseurl, $id, $data) {
         $this->id = $id;
         $this->data = $data;
+        $this->baseurl = $baseurl;
     }
 
     /**
