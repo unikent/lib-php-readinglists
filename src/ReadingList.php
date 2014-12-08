@@ -135,9 +135,8 @@ class ReadingList {
      * @param int $timestamp The timestamp to return
      */
     private static function contextual_time($timestamp) {
-        $largets = time();
+        $n = time() - $timestamp;
 
-        $n = $largets - $smallts;
         if ($n <= 1) {
             return 'less than 1 second ago';
         }
