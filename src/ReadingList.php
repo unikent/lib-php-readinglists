@@ -59,8 +59,15 @@ class ReadingList {
     /**
      * Grab list URL.
      */
+    public function get_base_url() {
+        return $this->baseurl;
+    }
+
+    /**
+     * Grab list URL.
+     */
     public function get_url() {
-        return Parser::INDEX_LISTS . $this->id;
+        return $this->get_base_url() . '/' . Parser::INDEX_LISTS . $this->id;
     }
 
     /**
@@ -79,7 +86,7 @@ class ReadingList {
         $count = 0;
         if (isset($data[Parser::INDEX_LISTS_LIST_ITEMS])) {
             foreach ($data[Parser::INDEX_LISTS_LIST_ITEMS] as $things) {
-                if (preg_match('/\/items\//', $things['value'])) {
+                if (preg_match('#/items/#', $things['value'])) {
                     $count++;
                 }
             }
