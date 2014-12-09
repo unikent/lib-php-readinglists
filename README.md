@@ -1,5 +1,5 @@
-readinglists-php
-================
+lib-php-readinglists
+====================
 
 [![Latest Stable Version](https://poser.pugx.org/unikent/lib-php-readinglists/v/stable.png)](https://packagist.org/packages/unikent/lib-php-readinglists)
 
