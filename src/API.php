@@ -195,7 +195,8 @@ class API
         // Curl the json for this category.
         $raw = $this->curl("{$url}.json");
 
-        $parser = new Parser($this, $url, $raw);
+        $baseurl = strpos($url, API::MEDWAY_URL) !== false ? API::MEDWAY_URL : API::CANTERBURY_URL;
+        $parser = new Parser($this, $baseurl, $raw);
         if (!$parser->is_valid()) {
             return array();
         }
