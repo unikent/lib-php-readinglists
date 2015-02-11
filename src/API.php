@@ -61,10 +61,10 @@ class API
     /**
      * Constructor.
      */
-    public function __construct() {
+    public function __construct($year = '2014') {
         $this->set_timeout(0);
         $this->set_campus(array('canterbury', 'medway'));
-        $this->set_timeperiod();
+        $this->set_timeperiod($year);
     }
 
     /**
@@ -101,11 +101,16 @@ class API
      *
      * @param string $timeperiod Time period to CURL. Defaults to latest.
      */
-    public function set_timeperiod($timeperiod = null) {
-        if ($timeperiod === null) {
-            $timeperiod = date("Y");
+    public function set_timeperiod($timeperiod) {
+        $map = $this->get_time_period_map();
+        foreach ($map as $campus => $periods) {
+            if (isset($periods[$timeperiod])) {
+                $this->_timeperiod = $timeperiod;
+                return;
+            }
         }
-        $this->_timeperiod = $timeperiod;
+
+        throw new \Exception("Invalid time period: '$timeperiod'.");
     }
 
     /**
