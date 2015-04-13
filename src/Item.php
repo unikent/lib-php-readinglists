@@ -53,6 +53,10 @@ class Item
 	 */
 	public function get_resource_url() {
 		$info = $this->data[$this->url];
+		if (!isset($info['http://purl.org/vocab/resourcelist/schema#resource'])) {
+			return null;
+		}
+
 		return $info['http://purl.org/vocab/resourcelist/schema#resource'][0]['value'];
 	}
 
@@ -62,6 +66,10 @@ class Item
 	 */
 	private function get_values($scheme) {
 		$resourceurl = $this->get_resource_url();
+		if (!$resourceurl) {
+			return array();
+		}
+		
 		$info = $this->data[$resourceurl];
 
 		if (!isset($info[$scheme])) {
