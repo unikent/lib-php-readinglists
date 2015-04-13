@@ -123,6 +123,8 @@ class Item
 
 	/**
 	 * Returns the name of a given author.
+	 * 
+	 * @internal
 	 */
 	private function get_author($url) {
 		$info = $this->data[$url];
@@ -146,6 +148,15 @@ class Item
 		}
 
 		return $authors;
+	}
+
+	/**
+	 * Returns the name of a publisher.
+	 */
+	public function get_publisher($url) {
+		$url = $this->get_value('http://purl.org/dc/terms/publisher');
+		$info = $this->data[$url];
+		return $info['http://xmlns.com/foaf/0.1/name'][0]['value'];
 	}
 
 	/**
