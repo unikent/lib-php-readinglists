@@ -61,10 +61,10 @@ class API
     /**
      * Constructor.
      */
-    public function __construct($year = '2014') {
+    public function __construct() {
         $this->set_timeout(0);
         $this->set_campus(array('canterbury', 'medway'));
-        $this->set_timeperiod($year);
+        $this->set_timeperiod();
     }
 
     /**
@@ -101,16 +101,11 @@ class API
      *
      * @param string $timeperiod Time period to CURL. Defaults to latest.
      */
-    public function set_timeperiod($timeperiod) {
-        $map = $this->get_time_period_map();
-        foreach ($map as $campus => $periods) {
-            if (isset($periods[$timeperiod])) {
-                $this->_timeperiod = $timeperiod;
-                return;
-            }
+    public function set_timeperiod($timeperiod = null) {
+        if ($timeperiod === null) {
+            $timeperiod = date("Y");
         }
-
-        throw new \Exception("Invalid time period: '$timeperiod'.");
+        $this->_timeperiod = $timeperiod;
     }
 
     /**
@@ -145,6 +140,44 @@ class API
                 '2012' => '1'
             )
         );
+    }
+
+    /**
+     * Returns a list item, given a URL.
+     */
+    public function get_item($url) {
+        $raw = $this->curl($url);
+        $json = json_decode($raw, true);
+        if (!$json) {
+            return null;
+        }
+
+        return new Item($this, $url, $raw);
+    }
+
+    /**
+     * Returns a list, given an ID.
+     *
+     * @param string $id List ID.
+     * @param string $campus Campus.
+     */
+    public function get_list($id, $campus = 'current') {
+        if ($campus == 'current') {
+            $campus = $this->_campus;
+        }
+
+        if (is_array($campus)) {
+            throw new \Exception("Campus cannot be an array!");
+        }
+
+        $url = self::CANTERBURY_URL;
+        if ($campus == 'medway') {
+            $url = self::MEDWAY_URL;
+        }
+
+        $raw = $this->curl($url . '/sections/' . $id . '.json');
+        $parser = new Parser($this, $url, $raw);
+        return $parser->get_list($id);
     }
 
     /**

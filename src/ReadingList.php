@@ -98,6 +98,22 @@ class ReadingList
     }
 
     /**
+     * Items in the list.
+     */
+    public function get_items() {
+        if (!isset($this->data[INDEX_CHILDREN_SPEC])) {
+            return array();
+        }
+
+        $items = array();
+        foreach ($this->data[INDEX_CHILDREN_SPEC] as $k => $data) {
+            $items[] = $this->api->get_item($data['value']);
+        }
+        
+        return $items;
+    }
+
+    /**
      * Counts the number of items in a list.
      */
     public function get_item_count() {
