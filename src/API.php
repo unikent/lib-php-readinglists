@@ -148,6 +148,44 @@ class API
     }
 
     /**
+     * Returns a list item, given a URL.
+     */
+    public function get_item($url) {
+        $raw = $this->curl($url . '.json');
+        $json = json_decode($raw, true);
+        if (!$json) {
+            return null;
+        }
+
+        return new Item($this, $url, $json);
+    }
+
+    /**
+     * Returns a list, given an ID.
+     *
+     * @param string $id List ID.
+     * @param string $campus Campus.
+     */
+    public function get_list($id, $campus = 'current') {
+        if ($campus == 'current') {
+            $campus = $this->_campus;
+        }
+
+        if (is_array($campus)) {
+            throw new \Exception("Campus cannot be an array!");
+        }
+
+        $url = self::CANTERBURY_URL;
+        if ($campus == 'medway') {
+            $url = self::MEDWAY_URL;
+        }
+
+        $raw = $this->curl($url . '/sections/' . $id . '.json');
+        $parser = new Parser($this, $url, $raw);
+        return $parser->get_list($id);
+    }
+
+    /**
      * Returns a list of reading lists for a given module code.
      *
      * @internal

@@ -16,12 +16,14 @@ namespace unikent\ReadingLists;
 class Parser
 {
     const INDEX_TIME_PERIOD = 'config/timePeriod';
+    const INDEX_LIST = 'sections/';
     const INDEX_LISTS = 'lists/';
     const INDEX_LISTS_TIME_PERIOD = 'http://lists.talis.com/schema/temp#hasTimePeriod';
     const INDEX_LISTS_LIST_ITEMS = 'http://purl.org/vocab/resourcelist/schema#contains';
     const INDEX_LISTS_LIST_UPDATED = 'http://purl.org/vocab/resourcelist/schema#lastUpdated';
     const INDEX_NAME_SPEC = 'http://rdfs.org/sioc/spec/name';
     const INDEX_PARENT_SPEC = 'http://rdfs.org/sioc/spec/parent_of';
+    const INDEX_CHILDREN_SPEC = 'http://rdfs.org/sioc/spec/container_of';
     const INDEX_CHILD_SPEC = 'http://rdfs.org/sioc/spec/has_parent';
 
     /**
@@ -145,9 +147,11 @@ class Parser
      * @param string $id Returns a list with a specified ID.
      */
     public function get_list($id) {
-        $key = $this->baseurl . '/' . self::INDEX_LISTS . $id;
-        if (isset($this->raw[$key])) {
-            return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
+        foreach (array(self::INDEX_LISTS, self::INDEX_LIST) as $k) {
+            $key = $this->baseurl . '/' . $k . $id;
+            if (isset($this->raw[$key])) {
+                return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
+            }
         }
 
         return null;
