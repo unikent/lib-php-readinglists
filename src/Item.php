@@ -63,6 +63,11 @@ class Item
 	private function get_values($scheme) {
 		$resourceurl = $this->get_resource_url();
 		$info = $this->data[$resourceurl];
+
+		if (!isset($info[$scheme])) {
+			return array();
+		}
+
 		$values = array();
 		foreach ($info[$scheme] as $k => $v) {
 			$values[$k] = $v['value'];
@@ -75,8 +80,8 @@ class Item
 	 * @internal
 	 */
 	private function get_value($scheme) {
-		$arr = $this->get_values($scheme);
-		return reset($arr[]);
+		$data = $this->get_values($scheme);
+		return reset($data);
 	}
 
 	/**
@@ -153,8 +158,12 @@ class Item
 	/**
 	 * Returns the name of a publisher.
 	 */
-	public function get_publisher($url) {
+	public function get_publisher() {
 		$url = $this->get_value('http://purl.org/dc/terms/publisher');
+		if (!$url) {
+			return;
+		}
+		
 		$info = $this->data[$url];
 		return $info['http://xmlns.com/foaf/0.1/name'][0]['value'];
 	}
