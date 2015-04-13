@@ -151,13 +151,13 @@ class API
      * Returns a list item, given a URL.
      */
     public function get_item($url) {
-        $raw = $this->curl($url);
+        $raw = $this->curl($url . '.json');
         $json = json_decode($raw, true);
         if (!$json) {
             return null;
         }
 
-        return new Item($this, $url, $raw);
+        return new Item($this, $url, $json);
     }
 
     /**
