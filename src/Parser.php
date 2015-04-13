@@ -147,9 +147,11 @@ class Parser
      * @param string $id Returns a list with a specified ID.
      */
     public function get_list($id) {
-        $key = $this->baseurl . '/' . self::INDEX_LIST . $id;
-        if (isset($this->raw[$key])) {
-            return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
+        foreach (array(self::INDEX_LISTS, self::INDEX_LIST) as $k) {
+            $key = $this->baseurl . '/' . $k . $id;
+            if (isset($this->raw[$key])) {
+                return new ReadingList($this->api, $this->baseurl, $id, $this->raw[$key]);
+            }
         }
 
         return null;
