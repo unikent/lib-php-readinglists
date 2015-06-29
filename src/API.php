@@ -2,7 +2,7 @@
 /**
  * Reading Lists API for is-dev applications.
  *
- * @copyright  2014 Skylar Kelty <S.Kelty@kent.ac.uk>
+ * @copyright  2015 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -61,7 +61,7 @@ class API
     /**
      * Constructor.
      */
-    public function __construct($year = '2014') {
+    public function __construct($year = '2015') {
         $this->set_timeout(0);
         $this->set_campus(array('canterbury', 'medway'));
         $this->set_timeperiod($year);
@@ -135,11 +135,13 @@ class API
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
+                '2015' => '53304cef6ea1f',
                 '2014' => '53304cb6f3d4d',
                 '2013' => '2',
                 '2012' => '1'
             ),
             'medway' => array(
+                '2015' => '53304d5bab1d4',
                 '2014' => '53304d3387393',
                 '2013' => '2',
                 '2012' => '1'
