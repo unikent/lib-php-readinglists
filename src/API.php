@@ -10,7 +10,7 @@ namespace unikent\ReadingLists;
 
 /**
  * Reading Lists API.
- * 
+ *
  * @example ../examples/example-1/run.php How to grab a module's reading lists.
  * @example ../examples/example-2/run.php How to grab a module's reading lists for a campus in a given year.
  */
@@ -28,7 +28,7 @@ class API
 
     /**
      * CURL Timeout.
-     * 
+     *
      * @internal
      * @var int
      */
@@ -36,7 +36,7 @@ class API
 
     /**
      * Our Campus.
-     * 
+     *
      * @internal
      * @var string
      */
@@ -44,7 +44,7 @@ class API
 
     /**
      * Our Timeperiod.
-     * 
+     *
      * @internal
      * @var string
      */
@@ -52,7 +52,7 @@ class API
 
     /**
      * A Cache Layer.
-     * 
+     *
      * @internal
      * @var mixed
      */
@@ -128,19 +128,25 @@ class API
     }
 
     /**
-     * You need a time period map :)
-     * 
+     * You need a time period map!
+     * An easy-ish way to get these is to inspect the selects here:
+     * http://resourcelists.kent.ac.uk/admin/rollover.html
+     *
      * @internal
      */
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
+                '2017' => '56f353645c000',
+                '2016' => '56f35361efece',
                 '2015' => '53304cef6ea1f',
                 '2014' => '53304cb6f3d4d',
                 '2013' => '2',
                 '2012' => '1'
             ),
             'medway' => array(
+                '2017' => '56f353e523d25',
+                '2016' => '56f353d1e77a6',
                 '2015' => '53304d5bab1d4',
                 '2014' => '53304d3387393',
                 '2013' => '2',
