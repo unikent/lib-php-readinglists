@@ -137,6 +137,7 @@ class API
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
+                '2018' => '56f353645c000', // TODO: when we rollover..
                 '2017' => '56f353645c000',
                 '2016' => '56f35361efece',
                 '2015' => '53304cef6ea1f',
@@ -145,6 +146,7 @@ class API
                 '2012' => '1'
             ),
             'medway' => array(
+                '2018' => '56f353e523d25', // TODO: when we rollover..
                 '2017' => '56f353e523d25',
                 '2016' => '56f353d1e77a6',
                 '2015' => '53304d5bab1d4',
