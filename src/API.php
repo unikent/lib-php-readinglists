@@ -19,7 +19,7 @@ class API
     /**
      * URL of the Canterbury Reading Lists system.
      */
-    const CANTERBURY_URL = 'http://resourcelists.kent.ac.uk';
+    const CANTERBURY_URL = 'https://kent.rl.talis.com';
 
     /**
      * URL of the Medway Reading Lists system.
