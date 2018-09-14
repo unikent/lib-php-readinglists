@@ -219,6 +219,7 @@ class API
 
         // Curl the lists json for this module out of the modules knowledge group.
         $raw = $this->curl("{$url}/modules/{$modulecode}/lists.json");
+        $raw = str_replace("http:\/\/resourcelists.kent.ac.uk", "https:\/\/kent.rl.talis.com", $raw);
 
         // Parse the dodgy-looking result into List objects.
         $parser = new Parser($this, $url, $raw);
@@ -230,7 +231,6 @@ class API
         $lists = array_map(function($list) use ($url, $parser) {
             return $parser->get_list($list);
         }, $lists);
-
         uasort($lists, function ($a, $b) {
             return strcmp($a->get_name(), $b->get_name());
         });
