@@ -24,7 +24,7 @@ class API
     /**
      * URL of the Medway Reading Lists system.
      */
-    const MEDWAY_URL = 'https://medway.rl.talis.com/';
+    const MEDWAY_URL = 'https://medway.rl.talis.com';
 
     /**
      * CURL Timeout.
