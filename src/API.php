@@ -219,8 +219,6 @@ class API
 
         // Curl the lists json for this module out of the modules knowledge group.
         $raw = $this->curl("{$url}/modules/{$modulecode}/lists.json");
-        $raw = str_replace("http:\/\/resourcelists.kent.ac.uk", "https:\/\/kent.rl.talis.com", $raw);
-        $raw = str_replace("http:\/\/medwaylists.kent.ac.uk", "https:\/\/medway.rl.talis.com", $raw);
 
         // Parse the dodgy-looking result into List objects.
         $parser = new Parser($this, $url, $raw);
@@ -303,6 +301,9 @@ class API
         }
 
         $result = curl_exec($ch);
+
+        $result = str_replace("http:\/\/resourcelists.kent.ac.uk", "https:\/\/kent.rl.talis.com", $result);
+        $result = str_replace("http:\/\/medwaylists.kent.ac.uk", "https:\/\/medway.rl.talis.com", $result);
 
         if ($this->_cache !== null) {
             $this->_cache->set($url, $result);
