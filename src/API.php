@@ -137,7 +137,7 @@ class API
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
-                '2019' => '3',
+                '2019' => '5c9d6b52769e6',
                 '2018' => '5ac2ca4b4d604',
                 '2017' => '56f353645c000',
                 '2016' => '56f35361efece',
