@@ -137,6 +137,7 @@ class API
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
+                '2021' => '5f91f0c7ee6ec',
                 '2020' => '5de52d41dce91',
                 '2019' => '5c9d6b52769e6',
                 '2018' => '5ac2ca4b4d604',
@@ -148,6 +149,7 @@ class API
                 '2012' => '1'
             ),
             'medway' => array(
+                '2021' => '60875c95590ae',
                 '2020' => '5de52d7c0b84f',
                 '2019' => '5c9d6b4bd4720',
                 '2018' => '5ac2cb0a265b3',
