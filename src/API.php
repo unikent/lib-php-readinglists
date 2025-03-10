@@ -137,6 +137,7 @@ class API
     private function get_time_period_map() {
         return array(
             'canterbury' => array(
+                '2025' => '67cac6e97ae6f',
                 '2024' => '660ff342b76d3',
                 '2023' => '63dbb5954e9df',
                 '2022' => '620a769f80a98',
@@ -152,6 +153,7 @@ class API
                 '2012' => '1'
             ),
             'medway' => array(
+                '2025' => '67cac6e97ae6f',
                 '2024' => '660ff376a1d84',
                 '2023' => '63dbb5b92e7b6',
                 '2022' => '620a7706a8707',
@@ -198,7 +200,7 @@ class API
         }
 
         $url = self::CANTERBURY_URL;
-        if ($campus == 'medway') {
+        if ($campus == 'medway' && $this->_timeperiod < 2025) {
             $url = self::MEDWAY_URL;
         }
 
@@ -225,7 +227,7 @@ class API
         $timeperiod = $timeperiod[$this->_timeperiod];
 
         $url = self::CANTERBURY_URL;
-        if ($campus == 'medway') {
+        if ($campus == 'medway' && $this->_timeperiod < 2025) {
             $url = self::MEDWAY_URL;
         }
 
